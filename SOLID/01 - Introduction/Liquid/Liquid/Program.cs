@@ -11,6 +11,9 @@ namespace Liquid
     // -----
     // Client 1: Ignore Residential type of housing.
     // Client 2: Ignore Commercial type of housing.
+    
+    // Violations:
+    // SRP, OCP, DIP
     public class Program
     {
         public static void Main(string[] args)
