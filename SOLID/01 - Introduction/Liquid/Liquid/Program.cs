@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Liquid
 {
@@ -15,13 +11,16 @@ namespace Liquid
     // -----
     // Client 1: Ignore Residential type of housing.
     // Client 2: Ignore Commercial type of housing.
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var client = 2;
+            var client = -1;
+            
+            int.TryParse(args[0], out client);
+
             var fileLines = File.ReadAllLines(".\\FL_insurance_sample.csv");
-            var output = new StreamWriter(File.OpenWrite("MyOutput.csv"));
+            var output = new StreamWriter(File.OpenWrite($".\\MyOutput{client}.csv"));
             output.WriteLine($"Country,Value");
             var total = 0.0;
             for (var i = 1; i < fileLines.Length; i++)
