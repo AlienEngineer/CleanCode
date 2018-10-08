@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
+using Liquid.IO;
+using Liquid.IO.CsvFiles;
+using Liquid.Models;
 
 namespace Liquid
 {
@@ -16,127 +15,36 @@ namespace Liquid
 
     // Violations:
     // SRP, OCP, DIP
+    
     public class Program
     {
-        private class InsuranceRecord
+       
+        private static IInsuranceRecordReader MakeInsuranceReader(TypeOfHousing typeOfHousing)
         {
-            public double Value { get; set; }
-            public string TypeOfHouse { get; set; }
-            public string Country { get; set; }
+            return new TypeOfHouseFilteredRecordReader(new CsvFileReader(), typeOfHousing);
         }
 
-        private interface IInsuranceRecordWriter
+        private static IInsuranceRecordWriter MakeInsuranceWriter()
         {
-            void StartExport(int client);
-            void StoreTotalValue(double total);
-            void StoreRecord(InsuranceRecord record);
+            return new CsvFileWriter();
         }
-
-        private class CsvFileWriter : IInsuranceRecordWriter
+        
+        private static TypeOfHousing GetTypeOfHousing(IReadOnlyList<string> args)
         {
-            private static StreamWriter _output;
+            int.TryParse(args[0], out var client);
 
-            public void StartExport(int client)
-            {
-                _output = new StreamWriter(File.OpenWrite($".\\MyOutput{client}.csv"));
-                _output.WriteLine($"Country,Value");
-            }
-
-            public void StoreTotalValue(double total)
-            {
-                _output.WriteLine("{0},{1}", total.ToString("F2", CultureInfo.InvariantCulture), DateTime.Now.ToString("d", CultureInfo.InvariantCulture));
-                _output.Flush();
-                _output.Close();
-            }
-
-            public void StoreRecord(InsuranceRecord record)
-            {
-                _output.WriteLine($"{record.Country},{record.Value.ToString("F2", CultureInfo.InvariantCulture)}");
-            }
-        }
-
-        private interface IInsuranceRecordReader
-        {
-            IEnumerable<InsuranceRecord> GetInsuranceRecords();
-        }
-
-        private class CsvFileReader : IInsuranceRecordReader
-        {
-            private static InsuranceRecord MapInsuranceRecord(int i, IReadOnlyList<string> fileLines)
-            {
-                var data = fileLines[i].Split(',');
-
-                double.TryParse(data[8], NumberStyles.Any, CultureInfo.InvariantCulture, out var value);
-                return new InsuranceRecord
-                {
-                    Country = data[3],
-                    TypeOfHouse = data[15],
-                    Value = value
-                };
-            }
-
-            public IEnumerable<InsuranceRecord> GetInsuranceRecords()
-            {
-                var fileLines = File.ReadAllLines(".\\FL_insurance_sample.csv");
-
-                var insuranceRecords = new List<InsuranceRecord>();
-
-                for (var i = 1; i < fileLines.Length; i++)
-                {
-                    var record = MapInsuranceRecord(i, fileLines);
-                    insuranceRecords.Add(record);
-                }
-
-                return insuranceRecords;
-            }
-
-        }
-
-        private class TypeOfHouseFilteredRecordReader : IInsuranceRecordReader
-        {
-            private readonly IInsuranceRecordReader csvFile;
-            private readonly string residential;
-
-            public TypeOfHouseFilteredRecordReader(IInsuranceRecordReader csvFile, string residential)
-            {
-                this.csvFile = csvFile;
-                this.residential = residential;
-            }
-
-            public IEnumerable<InsuranceRecord> GetInsuranceRecords()
-            {
-                return csvFile.GetInsuranceRecords()
-                    .Where(e => e.TypeOfHouse == residential);
-            }
+            return (TypeOfHousing)client;
         }
 
         public static void Main(string[] args)
         {
-            var csvFileWriter = new CsvFileWriter();
+            var typeOfHousing = GetTypeOfHousing(args);
 
-            IInsuranceRecordReader csvFile = new CsvFileReader();
-            int.TryParse(args[0], out var client);
+            var insuranceWriter = MakeInsuranceWriter();
+            var insuranceReader = MakeInsuranceReader(typeOfHousing);
 
-            if (client == 1)
-            {
-                csvFile = new TypeOfHouseFilteredRecordReader(csvFile, "Residential");
-            }
-            else if (client == 2)
-            {
-                csvFile = new TypeOfHouseFilteredRecordReader(csvFile, "Commercial");
-            }
-
-            var total = 0.0;
-
-            csvFileWriter.StartExport(client);
-
-            foreach (var record in csvFile.GetInsuranceRecords())
-            {
-                csvFileWriter.StoreRecord(record);
-                total += record.Value;
-            }
-
-            csvFileWriter.StoreTotalValue(total);
+            var exporter = new Exporter(insuranceWriter, insuranceReader);
+            exporter.Export(typeOfHousing);
         }
     }
 

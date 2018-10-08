@@ -43,8 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\CsvFiles\CsvFileReader.cs" />
+    <Compile Include="IO\CsvFiles\CsvFileWriter.cs" />
+    <Compile Include="IO\IInsuranceRecordReader.cs" />
+    <Compile Include="IO\IInsuranceRecordWriter.cs" />
+    <Compile Include="Models\InsuranceRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IO\TypeOfHouseFilteredRecordReader.cs" />
+    <Compile Include="Models\TypeOfHousing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
