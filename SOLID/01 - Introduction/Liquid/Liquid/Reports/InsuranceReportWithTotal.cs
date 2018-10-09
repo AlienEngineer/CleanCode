@@ -1,12 +1,7 @@
 ﻿using Liquid.IO;
 
-namespace Liquid
+namespace Liquid.Reports
 {
-    public interface IReport
-    {
-        void Export();
-    }
-
     internal class InsuranceReportWithTotal : IReport
     {
         private readonly IInsuranceRecordWriter insuranceRecordWriter;

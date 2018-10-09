@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InsuranceReports.cs" />
-    <Compile Include="InsuranceReportWithTotal.cs" />
+    <Compile Include="Reports\InsuranceReportWithTotal.cs" />
     <Compile Include="IO\CsvFiles\CsvFileReader.cs" />
     <Compile Include="IO\CsvFiles\CsvFileWriter.cs" />
     <Compile Include="IO\IInsuranceRecordReader.cs" />
@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\TypeOfHouseFilteredRecordReader.cs" />
     <Compile Include="Models\TypeOfHousing.cs" />
+    <Compile Include="Reports\IReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
