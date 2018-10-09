@@ -10,6 +10,8 @@ namespace Liquid
     // -----
     // Client 1: Residential type of housing.
     // Client 2: Commercial type of housing.
+    //
+    // Uml: https://yuml.me/52868898.jpg
     public static class Program
     {
         private static TypeOfHousing GetTypeOfHousing(this IReadOnlyList<string> args)
@@ -27,3 +29,52 @@ namespace Liquid
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    [Program|Main(args)]
+    [IReport|Export()]
+    [InsuranceReportWithTotal|Export()]
+    [InsuranceReports|GetReportWithTotal(typeOfHousing):IReport]
+    [Program]-uses>[InsuranceReports]
+    [InsuranceReports]-creates>[IReport]
+    [IReport]^-.-[InsuranceReportWithTotal]
+    [InsuranceReportWithTotal]<>->[IInsuranceRecordReader]
+    [InsuranceReportWithTotal]<>->[IInsuranceRecordWriter]
+    [IInsuranceRecordReader]^-.-[CsvFileReader]
+    [IInsuranceRecordReader]^-.-[TypeOfHouseFilteredRecordReader]
+    [TypeOfHouseFilteredRecordReader]<>->[IInsuranceRecordReader]
+    [IInsuranceRecordWriter]^-.-[CsvFileWriter]
+ */
