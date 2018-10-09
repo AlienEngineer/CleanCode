@@ -34,7 +34,7 @@ namespace Liquid
                     {
                         if (fileLines[i].Split(',')[15] == "Residential")
                         {
-                            output.WriteLine($"{fileLines[i].Split(',')[3]},{value.ToString("F2", CultureInfo.InvariantCulture)}");
+                            output.WriteLine($"{fileLines[i].Split(',')[2]},{value.ToString("F2", CultureInfo.InvariantCulture)}");
                             total += value;
                         }
                     }
@@ -42,7 +42,7 @@ namespace Liquid
                     {
                         if (fileLines[i].Split(',')[15] == "Commercial")
                         {
-                            output.WriteLine($"{fileLines[i].Split(',')[3]},{value.ToString("F2", CultureInfo.InvariantCulture)}");
+                            output.WriteLine($"{fileLines[i].Split(',')[2]},{value.ToString("F2", CultureInfo.InvariantCulture)}");
                             total += value;
                         }
                     }
