@@ -9,8 +9,8 @@ namespace Liquid
     // Store the Value by country
     // The last line must have the total and the current date
     // -----
-    // Client 1: Ignore Residential type of housing.
-    // Client 2: Ignore Commercial type of housing.
+    // Client 1: Residential type of housing.
+    // Client 2: Commercial type of housing.
     
     // Violations:
     // SRP, OCP, DIP
