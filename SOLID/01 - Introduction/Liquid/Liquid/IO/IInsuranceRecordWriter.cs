@@ -4,7 +4,7 @@ namespace Liquid.IO
 {
     internal interface IInsuranceRecordWriter
     {
-        void StartExport(TypeOfHousing client);
+        void StartExport();
         void StoreTotalValue(double total);
         void StoreRecord(InsuranceRecord record);
     }

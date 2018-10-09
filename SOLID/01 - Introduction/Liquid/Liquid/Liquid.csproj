@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exporter.cs" />
+    <Compile Include="InsuranceReports.cs" />
+    <Compile Include="InsuranceReportWithTotal.cs" />
     <Compile Include="IO\CsvFiles\CsvFileReader.cs" />
     <Compile Include="IO\CsvFiles\CsvFileWriter.cs" />
     <Compile Include="IO\IInsuranceRecordReader.cs" />

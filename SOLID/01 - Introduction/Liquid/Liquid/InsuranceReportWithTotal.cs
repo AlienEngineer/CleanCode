@@ -1,22 +1,26 @@
 ﻿using Liquid.IO;
-using Liquid.Models;
 
 namespace Liquid
 {
-    internal class Exporter
+    public interface IReport
+    {
+        void Export();
+    }
+
+    internal class InsuranceReportWithTotal : IReport
     {
         private readonly IInsuranceRecordWriter insuranceRecordWriter;
         private readonly IInsuranceRecordReader insuranceReader;
 
-        public Exporter(IInsuranceRecordWriter insuranceRecordWriter, IInsuranceRecordReader insuranceReader)
+        public InsuranceReportWithTotal(IInsuranceRecordWriter insuranceRecordWriter, IInsuranceRecordReader insuranceReader)
         {
             this.insuranceRecordWriter = insuranceRecordWriter;
             this.insuranceReader = insuranceReader;
         }
 
-        public void Export(TypeOfHousing typeOfHousing)
+        public void Export()
         {
-            insuranceRecordWriter.StartExport(typeOfHousing);
+            insuranceRecordWriter.StartExport();
 
             var total = 0.0;
             foreach (var record in insuranceReader.GetInsuranceRecords())

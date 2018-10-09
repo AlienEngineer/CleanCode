@@ -1,6 +1,6 @@
 ﻿namespace Liquid.Models
 {
-    internal enum TypeOfHousing
+    public enum TypeOfHousing
     {
         Residential = 1,
         Commercial = 2

@@ -6,18 +6,18 @@ namespace Liquid.IO
 {
     internal class TypeOfHouseFilteredRecordReader : IInsuranceRecordReader
     {
-        private readonly IInsuranceRecordReader csvFile;
+        private readonly IInsuranceRecordReader recordReader;
         private readonly string typeOfHousing;
 
-        public TypeOfHouseFilteredRecordReader(IInsuranceRecordReader csvFile, TypeOfHousing typeOfHousing)
+        public TypeOfHouseFilteredRecordReader(IInsuranceRecordReader recordReader, TypeOfHousing typeOfHousing)
         {
-            this.csvFile = csvFile;
+            this.recordReader = recordReader;
             this.typeOfHousing = typeOfHousing.ToString();
         }
 
         public IEnumerable<InsuranceRecord> GetInsuranceRecords()
         {
-            return csvFile.GetInsuranceRecords()
+            return recordReader.GetInsuranceRecords()
                 .Where(e => e.TypeOfHouse == typeOfHousing);
         }
     }

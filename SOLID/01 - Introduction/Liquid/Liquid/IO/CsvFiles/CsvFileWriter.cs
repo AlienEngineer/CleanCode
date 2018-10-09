@@ -7,9 +7,15 @@ namespace Liquid.IO.CsvFiles
 {
     internal class CsvFileWriter : IInsuranceRecordWriter
     {
+        private readonly TypeOfHousing client;
         private static StreamWriter _output;
 
-        public void StartExport(TypeOfHousing client)
+        public CsvFileWriter(TypeOfHousing client)
+        {
+            this.client = client;
+        }
+
+        public void StartExport()
         {
             _output = new StreamWriter(File.OpenWrite($".\\MyOutput{(int)client}.csv"));
             _output.WriteLine($"Country,Value");

@@ -14,7 +14,7 @@ namespace Liquid.IO.CsvFiles
             double.TryParse(data[8], NumberStyles.Any, CultureInfo.InvariantCulture, out var value);
             return new InsuranceRecord
             {
-                Country = data[3],
+                Country = data[2],
                 TypeOfHouse = data[15],
                 Value = value
             };
