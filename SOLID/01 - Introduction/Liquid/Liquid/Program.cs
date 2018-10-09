@@ -11,7 +11,8 @@ namespace Liquid
     // -----
     // Client 1: Residential type of housing.
     // Client 2: Commercial type of housing.
-    
+    //
+    // Uml: http://yuml.me/diagram/plain/class/[Program|Main(args)]
     public class Program
     {
         public static void Main(string[] args)
