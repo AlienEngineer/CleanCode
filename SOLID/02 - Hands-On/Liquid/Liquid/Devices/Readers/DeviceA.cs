@@ -1,10 +1,11 @@
 ﻿using Liquid.Models;
 
-namespace Liquid.Devices
+namespace Liquid.Devices.Readers
 {
-    internal class DeviceA
+    internal class DeviceA : IDeviceReaderFacade
     {
         public DeviceState State { get; private set; }
+        public string Id { get; } = "A";
 
         public void Connect()
         {

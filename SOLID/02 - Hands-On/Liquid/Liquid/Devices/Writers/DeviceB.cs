@@ -1,11 +1,11 @@
-﻿using System;
-using Liquid.Models;
+﻿using Liquid.Models;
 
-namespace Liquid.Devices
+namespace Liquid.Devices.Writers
 {
-    internal class DeviceD
+    internal class DeviceB : IDeviceWriterFacade
     {
         public DeviceState State { get; private set; }
+        public string Id { get; } = "B";
         
         public void Connect()
         {
@@ -19,12 +19,7 @@ namespace Liquid.Devices
 
         public bool Analyze(DataToAnalyze data)
         {
-            if (data.Something == "SOLID")
-            {
-                throw new Exception("This is my device exception.");
-            }
-
-            return data.Something == "LIQUID";
+            return data.Something == "SOLID";
         }
     }
 }

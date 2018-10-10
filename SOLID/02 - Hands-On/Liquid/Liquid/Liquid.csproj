@@ -43,19 +43,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientDefinitions\Client1DeviceFacade.cs" />
+    <Compile Include="ClientDefinitions\Client2DeviceFacade.cs" />
+    <Compile Include="ClientDefinitions\ClientDeviceFacade.cs" />
+    <Compile Include="Devices\DeviceComposite.cs" />
+    <Compile Include="Devices\DeviceWriterComposite.cs" />
+    <Compile Include="Devices\Exceptions\ConsoleLogExceptionHandler.cs" />
+    <Compile Include="Devices\IDevice.cs" />
+    <Compile Include="Devices\IDeviceReader.cs" />
+    <Compile Include="Devices\IDeviceReaderFacade.cs" />
+    <Compile Include="Devices\IDeviceWriter.cs" />
+    <Compile Include="Devices\IDeviceWriterFacade.cs" />
+    <Compile Include="Devices\Exceptions\IExceptionHandler.cs" />
+    <Compile Include="Devices\Logging\DeviceConsoleLog.cs" />
+    <Compile Include="Devices\Logging\DeviceReaderConsoleLog.cs" />
+    <Compile Include="Devices\Logging\DeviceWriterConsoleLog.cs" />
+    <Compile Include="ClientDefinitions\IClientDeviceFacade.cs" />
+    <Compile Include="Devices\Exceptions\StubExceptionHandler.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\DataToAnalyze.cs" />
-    <Compile Include="Devices\DeviceA.cs" />
-    <Compile Include="Devices\DeviceD.cs" />
-    <Compile Include="Devices\DeviceC.cs" />
-    <Compile Include="Devices\DeviceB.cs" />
+    <Compile Include="Devices\Readers\DeviceA.cs" />
+    <Compile Include="Devices\Writers\DeviceD.cs" />
+    <Compile Include="Devices\Writers\DeviceC.cs" />
+    <Compile Include="Devices\Writers\DeviceB.cs" />
     <Compile Include="Models\DeviceState.cs" />
-    <Compile Include="Devices\DeviceE.cs" />
+    <Compile Include="Devices\Writers\DeviceE.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Products\LiquidProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
