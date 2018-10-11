@@ -1,4 +1,9 @@
-﻿using Liquid.Devices;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Liquid.Devices;
+using Liquid.Devices.Logging;
+using Liquid.Devices.Readers;
+using Liquid.Devices.Writers;
 using Liquid.Models;
 
 namespace Liquid.ClientDefinitions
@@ -18,6 +23,13 @@ namespace Liquid.ClientDefinitions
             this.allDevices = allDevices;
         }
 
+        public ClientDeviceFacade(IDeviceReaderFacade deviceReader, IEnumerable<IDeviceWriterFacade> deviceWriters)
+            : this(
+                new DeviceWriterComposite(MakeLoggerWriters(deviceWriters)),
+                deviceReader,
+                new DeviceComposite(MakeLoggerDevices(new IDevice[] { deviceReader }.Concat(deviceWriters))))
+        { }
+
         public Data ReadData() => deviceReader.ReadData();
 
         public bool Analyze(DataToAnalyze data) => deviceWriter.Analyze(data);
@@ -25,5 +37,12 @@ namespace Liquid.ClientDefinitions
         public void Connect() => allDevices.Connect();
 
         public void Disconnect() => allDevices.Disconnect();
+
+        
+        private static IEnumerable<IDeviceWriterFacade> MakeLoggerWriters(IEnumerable<IDeviceWriterFacade> deviceWriters) => 
+            deviceWriters.Select(deviceWriter => new DeviceWriterConsoleLog(deviceWriter)).ToArray();
+
+        private static IEnumerable<IDevice> MakeLoggerDevices(IEnumerable<IDevice> devices) => 
+            devices.Select(device => new DeviceConsoleLog(device)).ToArray();
     }
 }

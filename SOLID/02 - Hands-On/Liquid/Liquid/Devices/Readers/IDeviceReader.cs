@@ -1,6 +1,6 @@
 ﻿using Liquid.Models;
 
-namespace Liquid.Devices
+namespace Liquid.Devices.Readers
 {
     internal interface IDeviceReader
     {

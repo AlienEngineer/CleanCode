@@ -1,4 +1,6 @@
 ﻿using Liquid.Devices;
+using Liquid.Devices.Readers;
+using Liquid.Devices.Writers;
 
 namespace Liquid.ClientDefinitions
 {

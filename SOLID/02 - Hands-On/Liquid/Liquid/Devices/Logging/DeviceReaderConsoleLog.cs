@@ -1,13 +1,15 @@
 ﻿using System;
+using Liquid.Devices.Readers;
 using Liquid.Models;
 
 namespace Liquid.Devices.Logging
 {
-    internal class DeviceReaderConsoleLog : IDeviceReader
+    internal class DeviceReaderConsoleLog : DeviceConsoleLog, IDeviceReaderFacade
     {
         private readonly IDeviceReader device;
 
-        public DeviceReaderConsoleLog(IDeviceReader device)
+        public DeviceReaderConsoleLog(IDeviceReaderFacade device)
+            : base(device)
         {
             this.device = device;
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Liquid.Devices.Exceptions
+namespace Liquid.Devices.Exceptions.Handlers
 {
     internal interface IExceptionHandler
     {

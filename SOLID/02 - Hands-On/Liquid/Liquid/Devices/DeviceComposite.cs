@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Liquid.Devices.Exceptions;
+using Liquid.Devices.Exceptions.Handlers;
 using Liquid.Models;
 
 namespace Liquid.Devices

@@ -1,13 +1,15 @@
 ﻿using System;
+using Liquid.Devices.Writers;
 using Liquid.Models;
 
 namespace Liquid.Devices.Logging
 {
-    internal class DeviceWriterConsoleLog : IDeviceWriter
+    internal class DeviceWriterConsoleLog : DeviceConsoleLog, IDeviceWriterFacade
     {
         private readonly IDeviceWriter device;
 
-        public DeviceWriterConsoleLog(IDeviceWriter device)
+        public DeviceWriterConsoleLog(IDeviceWriterFacade device)
+            : base(device)
         {
             this.device = device;
         }
@@ -25,5 +27,6 @@ namespace Liquid.Devices.Logging
 
             return success;
         }
+
     }
 }

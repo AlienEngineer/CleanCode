@@ -1,16 +1,7 @@
-﻿using Liquid.Models;
-
-namespace Liquid.Devices
+﻿namespace Liquid.Devices
 {
-    internal interface IConnectableDevice
+    internal interface IDevice : IConnectableDevice, IStatefullDevice
     {
-        void Connect();
-        void Disconnect();
-    }
-
-    internal interface IDevice : IConnectableDevice
-    {
-        DeviceState State { get; }
         string Id { get; }
     }
 }
