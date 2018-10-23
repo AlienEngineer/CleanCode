@@ -1,4 +1,6 @@
 using System;
+using Moq;
+using TestMyStuff.Lib;
 using Xunit;
 
 namespace TestMyStuff
@@ -23,7 +25,7 @@ namespace TestMyStuff
 
             try
             {
-                subject.ThrowException();
+                subject.InvalidOperation();
                 Assert.False(true);
             }
             catch (Exception e)
@@ -53,28 +55,17 @@ namespace TestMyStuff
             }
         }
 
-    }
-
-    public class SubjectUnderTest
-    {
-        public ComplexObject SomeCalculation()
+        [Fact]
+        public void Test4()
         {
-            return new ComplexObject
-            {
-                Field = new SomeOtherObject()
-            };
+            var mock = new Mock<IDependency>();
+            var subject1 = new SubjectWithDependency(mock.Object);
+
+            subject1.Operation();
+
+            mock.Verify(e => e.Operation());
         }
 
-        public void ThrowException()
-        {
-            throw new Exception();
-        }
     }
 
-    public class SomeOtherObject { }
-
-    public class ComplexObject
-    {
-        public SomeOtherObject Field { get; set; }
-    }
 }
