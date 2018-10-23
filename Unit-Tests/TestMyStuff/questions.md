@@ -23,7 +23,6 @@
   * Gives us garanties that our code works
   * Gives us garanties that our code keeps working
   * Clarifies what should be expected of our code
-  * 
 * How does it help me in day to day work?
   * Saves up time on debugging
   * Saves up time on buggy deploys
